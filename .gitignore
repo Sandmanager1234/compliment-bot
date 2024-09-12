@@ -1,0 +1,4 @@
+.venv
+.env
+compliments.txt
+compliments.db
