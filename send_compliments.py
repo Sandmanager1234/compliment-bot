@@ -7,8 +7,14 @@ async def send_compliment(tg_id):
     compliment = random.choice(COMPLIMENTS)
     await bot.send_message(tg_id, compliment)
 
-if __name__ == '__main__':
+async def main():
     users = db.get_users()
+    tasks = []
     for user in users:
         tg_id = user[0]
-        asyncio.run(send_compliment(tg_id))
+        tasks.append(asyncio.create_task(send_compliment(tg_id)))
+    asyncio.gather(*tasks)
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
